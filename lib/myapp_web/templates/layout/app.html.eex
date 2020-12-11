@@ -17,6 +17,10 @@
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
+            <%= if current_user(@conn) do %>
+              <li><%= link "Users", to: Routes.user_path(@conn, :index) %></li>
+              <li><%= link "Logout", to: Routes.session_path(@conn, :delete) %></li>
+            <% end %>
           </ul>
         </nav>
         <a href="<%= Routes.page_path(@conn, :index) %>" class="phx-logo">
