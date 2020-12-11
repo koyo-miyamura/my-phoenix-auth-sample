@@ -101,4 +101,12 @@ defmodule Myapp.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
+  end
+
+  def login(user, raw_password) do
+    Bcrypt.check_pass(user, raw_password, hash_key: :password)
+  end
 end

@@ -1,0 +1,10 @@
+<div>
+  <%= form_tag Routes.session_path(@conn, :create) do %>
+    <%= label :user, :email %>
+    <%= text_input :user, :email %>
+
+    <%= label :user, :raw_password %>
+    <%= password_input :user, :raw_password %>
+    <%= submit "Login" %>
+  <% end %>
+</div>

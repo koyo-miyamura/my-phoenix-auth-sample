@@ -13,11 +13,23 @@ defmodule MyappWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug MyappWeb.Plug.Auth
+  end
+
   scope "/", MyappWeb do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/users", UserController
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+
+    scope "/" do
+      pipe_through :auth
+
+      resources "/users", UserController
+      get "/logout", SessionController, :delete
+    end
   end
 
   # Other scopes may use custom stacks.
